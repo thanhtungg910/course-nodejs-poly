@@ -1,0 +1,26 @@
+{
+  "name": "course-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --watch ./src/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhtungg910/course-nodejs.git"
+  },
+  "author": "thanhtung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thanhtungg910/course-nodejs/issues"
+  },
+  "homepage": "https://github.com/thanhtungg910/course-nodejs#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
