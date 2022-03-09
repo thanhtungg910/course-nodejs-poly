@@ -1,5 +1,6 @@
-const express = require("express");
-const productList = require("./routes/products");
+import express from "express";
+import { default as productList } from "./routes/products";
+
 const app = express();
 
 //MIDDLEWARE

@@ -3,4 +3,4 @@ const check = (rep, res, next) => {
 	if (access) return next();
 	console.log("false");
 };
-module.exports = check;
+export default check;
