@@ -1,4 +1,4 @@
-import { default as productDb } from "../models/Products";
+import { default as productDB } from "../models/Products";
 /* const products = [
 	{ id: 1, title: "A" },
 	{ id: 2, title: "B" },
@@ -8,40 +8,74 @@ import { default as productDb } from "../models/Products";
 // GET ALL
 const getAll = async (req, res) => {
 	try {
-		const products = await productDb.find();
+		const products = await productDB.find().exec();
 		res.json(products);
 	} catch (error) {
-		console.log(error);
-	}
-};
-const addProduct = (req, res) => {
-	try {
-		const { title, description, price } = req.body;
-		const product = new productDb({
-			title: title,
-			description: description,
-			price: price,
-		})
-			.save()
-			.then(() => res.json(product));
-	} catch (error) {
-		console.log(error);
+		res.json({ message: error });
 	}
 };
 
-const getProduct = (req, res) => {
+// ADD PRODUCT
+const addProduct = (req, res) => {
+	try {
+		const { title, description, price } = req.body;
+		const product = new productDB({
+			title: title,
+			description: description,
+			price: price,
+		}).save();
+		res.json(product);
+	} catch (error) {
+		res.json({ message: error });
+	}
+};
+
+const getProduct = async (req, res) => {
+	try {
+		const product = await productDB.findById(req.params.id);
+		res.json(product);
+	} catch (error) {
+		res.json({ message: error });
+	}
+
 	/* const id = req.params.id;
 	const data = products.find((item) => item.id == id);
 	// const newProduct = [...products, { ...req.body }];
 	res.json(data); */
 };
-const update = (req, res) => {
+const update = async (req, res) => {
+	try {
+		const { title, description, price } = req.body;
+		const product = await productDB.updateOne(
+			{
+				_id: req.params.id,
+			},
+			{
+				$set: {
+					title: title,
+					description: description,
+					price: price,
+				},
+			}
+		);
+		res.json(product);
+	} catch (error) {
+		res.json({ message: error });
+	}
+
 	/* const newProducts = products.map((item) =>
 		item.id === +req.params.id ? req.body : item
 	);
 	res.json(newProducts); */
 };
-const deleteProduct = (req, res) => {
+const deleteProduct = async (req, res) => {
+	try {
+		const product = await productDB.remove({ _id: req.params.id });
+		res.json(product);
+	} catch (error) {
+		res.json({ message: err });
+	}
+
 	/* const id = req.params.id;
 	const newProduct = products.filter((item) => item.id == id);
 	// const newProduct = [...products, { ...req.body }];

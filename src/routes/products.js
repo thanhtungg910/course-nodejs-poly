@@ -15,7 +15,7 @@ router.post("/", check, addProduct);
 
 router.get("/:id", check, getProduct);
 
-router.put("/:id", check, update);
+router.patch("/:id", check, update);
 
 router.delete("/:id", check, deleteProduct);
 
