@@ -5,7 +5,7 @@ const app = express();
 
 //MIDDLEWARE
 app.use(express.json());
-app.use("/api", productList);
+app.use("/api/products", productList);
 
 app.get("/", (req, res) => {
 	res.send("<h1>HOME PAGE</h1>");
