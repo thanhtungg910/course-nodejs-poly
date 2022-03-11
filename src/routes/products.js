@@ -1,39 +1,22 @@
 import express from "express";
 import check from "../middleware/check";
+import {
+	getAll,
+	addProduct,
+	update,
+	getProduct,
+	deleteProduct,
+} from "../controllers/products";
 const router = express.Router();
-const products = [
-	{ id: 1, title: "A" },
-	{ id: 2, title: "B" },
-	{ id: 3, title: "C" },
-];
 
-router.get("/", check, (req, res) => {
-	res.json(products);
-});
+router.get("/", check, getAll);
 
-router.post("/", check, (req, res) => {
-	products.push(req.body);
-	// const newProduct = [...products, { ...req.body }];
-	res.json(products);
-});
-router.get("/:id", check, (req, res) => {
-	const id = req.params.id;
-	const data = products.find((item) => item.id == id);
-	// const newProduct = [...products, { ...req.body }];
-	res.json(data);
-});
+router.post("/", check, addProduct);
 
-router.put("/:id", check, (req, res) => {
-	const newProducts = products.map((item) =>
-		item.id === +req.params.id ? req.body : item
-	);
-	res.json(newProducts);
-});
+router.get("/:id", check, getProduct);
 
-router.delete("/:id", check, (req, res) => {
-	const id = req.params.id;
-	const newProduct = products.filter((item) => item.id == id);
-	// const newProduct = [...products, { ...req.body }];
-	res.json(newProduct);
-});
+router.put("/:id", check, update);
+
+router.delete("/:id", check, deleteProduct);
+
 export default router;
