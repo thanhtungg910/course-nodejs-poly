@@ -11,9 +11,11 @@ app.use("/api/products", productList);
 app.get("/", (req, res) => {
 	res.send("<h1>HOME PAGE</h1>");
 });
+
+//CONNECT DB
 db.connect();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
 	console.log("Running port " + PORT);
 });

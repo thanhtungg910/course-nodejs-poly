@@ -9,33 +9,28 @@ import { default as productDB } from "../models/Products";
 const getAll = async (req, res) => {
 	try {
 		const products = await productDB.find().exec();
-		res.json(products);
+		res.status(200).json(products);
 	} catch (error) {
-		res.json({ message: error });
+		res.status(400).json({ message: error });
 	}
 };
 
 // ADD PRODUCT
 const addProduct = (req, res) => {
 	try {
-		const { title, description, price } = req.body;
-		const product = new productDB({
-			title: title,
-			description: description,
-			price: price,
-		}).save();
-		res.json(product);
+		const product = new productDB(req.body).save();
+		res.status(200).json(product);
 	} catch (error) {
-		res.json({ message: error });
+		res.status(400).json({ message: error });
 	}
 };
 
 const getProduct = async (req, res) => {
 	try {
 		const product = await productDB.findById(req.params.id);
-		res.json(product);
+		res.status(200).json(product);
 	} catch (error) {
-		res.json({ message: error });
+		res.status(400).json({ message: error });
 	}
 
 	/* const id = req.params.id;
@@ -58,9 +53,9 @@ const update = async (req, res) => {
 				},
 			}
 		);
-		res.json(product);
+		res.status(200).json(product);
 	} catch (error) {
-		res.json({ message: error });
+		res.status(400).json({ message: error });
 	}
 
 	/* const newProducts = products.map((item) =>
@@ -71,7 +66,7 @@ const update = async (req, res) => {
 const deleteProduct = async (req, res) => {
 	try {
 		const product = await productDB.remove({ _id: req.params.id });
-		res.json(product);
+		res.status(200).json(product);
 	} catch (error) {
 		res.json({ message: err });
 	}
