@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/thanhtungg910/course-nodejs#readme",
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   },
   "dependencies": {

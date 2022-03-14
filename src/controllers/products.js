@@ -1,4 +1,4 @@
-import { default as productDB } from "../models/Products";
+import productDB from "../models/Products";
 /* const products = [
 	{ id: 1, title: "A" },
 	{ id: 2, title: "B" },
@@ -27,7 +27,7 @@ const addProduct = (req, res) => {
 
 const getProduct = async (req, res) => {
 	try {
-		const product = await productDB.findById(req.params.id);
+		const product = await productDB.findById(req.params.id).exec();
 		res.status(200).json(product);
 	} catch (error) {
 		res.status(400).json({ message: error });
@@ -40,19 +40,17 @@ const getProduct = async (req, res) => {
 };
 const update = async (req, res) => {
 	try {
-		const { title, description, price } = req.body;
-		const product = await productDB.updateOne(
-			{
-				_id: req.params.id,
-			},
-			{
-				$set: {
-					title: title,
-					description: description,
-					price: price,
+		const product = await productDB
+			.updateOne(
+				{
+					_id: req.params.id,
 				},
-			}
-		);
+				{
+					$set: req.body,
+				},
+				{ new: true }
+			)
+			.exec();
 		res.status(200).json(product);
 	} catch (error) {
 		res.status(400).json({ message: error });
@@ -65,7 +63,7 @@ const update = async (req, res) => {
 };
 const deleteProduct = async (req, res) => {
 	try {
-		const product = await productDB.remove({ _id: req.params.id });
+		const product = await productDB.remove({ _id: req.params.id }).exec();
 		res.status(200).json(product);
 	} catch (error) {
 		res.json({ message: err });
@@ -76,4 +74,13 @@ const deleteProduct = async (req, res) => {
 	// const newProduct = [...products, { ...req.body }];
 	res.json(newProduct); */
 };
-export { getAll, addProduct, getProduct, update, deleteProduct };
+
+const findByPrice = (req, res) => {
+	console.log(1);
+	try {
+	} catch (error) {
+		res.status(400).json({ message: error });
+	}
+};
+
+export { getAll, addProduct, getProduct, update, deleteProduct, findByPrice };
