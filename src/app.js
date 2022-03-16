@@ -7,6 +7,7 @@ const app = express();
 //MIDDLEWARE
 app.use(morgan());
 app.use(express.json());
+//ROUTING
 app.use("/api/products", productList);
 
 app.get("/", (req, res) => {
