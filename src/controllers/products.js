@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import productDB from "../models/Products";
 /* const products = [
 	{ id: 1, title: "A" },
@@ -17,6 +18,7 @@ const getAll = async (req, res) => {
 
 // ADD PRODUCT
 const addProduct = (req, res) => {
+	req.body.slug = slugify(req.body.title);
 	try {
 		const product = new productDB(req.body).save();
 		res.status(200).json(product);
@@ -27,7 +29,7 @@ const addProduct = (req, res) => {
 
 const getProduct = async (req, res) => {
 	try {
-		const product = await productDB.findById(req.params.id).exec();
+		const product = await productDB.findOne({ slug: req.params.slug }).exec();
 		res.status(200).json(product);
 	} catch (error) {
 		res.status(400).json({ message: error });
@@ -43,7 +45,7 @@ const update = async (req, res) => {
 		const product = await productDB
 			.updateOne(
 				{
-					_id: req.params.id,
+					slug: req.params.slug,
 				},
 				{
 					$set: req.body,
@@ -63,7 +65,7 @@ const update = async (req, res) => {
 };
 const deleteProduct = async (req, res) => {
 	try {
-		const product = await productDB.remove({ _id: req.params.id }).exec();
+		const product = await productDB.remove({ slug: req.params.slug }).exec();
 		res.status(200).json(product);
 	} catch (error) {
 		res.json({ message: err });

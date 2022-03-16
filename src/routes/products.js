@@ -14,14 +14,14 @@ router.get("/", check, getAll);
 
 router.post("/", check, addProduct);
 
-router.get("/:id", check, getProduct);
+router.get("/:slug", check, getProduct);
 
 router.get("/price_gte=:gte&price_lte=:lte", check, findByPrice);
 
-router.patch("/:id", check, update);
+router.patch("/:slug", check, update);
 
-router.put("/:id", check, update);
+router.put("/:slug", check, update);
 
-router.delete("/:id", check, deleteProduct);
+router.delete("/:slug", check, deleteProduct);
 
 export default router;

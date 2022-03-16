@@ -9,6 +9,8 @@ const ProductsSchema = new Schema(
 			type: String,
 			minlength: 5,
 			lowercase: true,
+			index: true,
+			unique: true,
 		},
 		description: {
 			type: String,
@@ -20,6 +22,7 @@ const ProductsSchema = new Schema(
 		},
 		category: {
 			type: ObjectId,
+			ref: "Categories",
 		},
 	},
 	{ timestamps: true }
