@@ -8,6 +8,7 @@ import productDB from "../models/Products";
 
 // GET ALL
 const getAll = async (req, res) => {
+	console.log("🚀 ~ file: products.js ~ line 11 ~ getAll ~ req", req.user);
 	try {
 		const products = await productDB.find().exec();
 		res.status(200).json(products);

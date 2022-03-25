@@ -11,7 +11,7 @@ app.use(express.json());
 //ROUTING
 app.use("/api/products", productList);
 app.use("/api/categories", categoryList);
-app.use("/api", userList);
+app.use("/api/users", userList);
 
 app.get("/", (req, res) => {
 	res.send("<h1>HOME PAGE</h1>");
