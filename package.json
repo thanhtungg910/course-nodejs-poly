@@ -5,7 +5,7 @@
   "main": "./src/app.js",
   "type": "module",
   "scripts": {
-    "start": "node --trace-warnings ./src/app.js --exec ./node_modules/.bin/babel-node src/index.js -e js"
+    "start": "nodemon ./src/app.js --exec ./node_modules/.bin/babel-node src/index.js -e js"
   },
   "repository": {
     "type": "git",
